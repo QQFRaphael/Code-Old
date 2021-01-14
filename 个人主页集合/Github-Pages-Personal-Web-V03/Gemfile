@@ -3,7 +3,7 @@
 source 'http://rubygems.org'
 
 group :development do
-  gem 'rake', '~> 10.4.2'
+  gem 'rake', '~> 12.3.3'
   gem 'sass', '~> 3.5.2'
   gem 'jekyll', '~> 3.6.2'
   gem 'travis', '~> 1.8'
