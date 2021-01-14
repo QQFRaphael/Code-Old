@@ -1,4 +1,4 @@
-var sciHubPlugin = '0.0.9';
+var sciHubPlugin = '0.1.99';
 
 function submit(url, domain)
 {
@@ -12,7 +12,7 @@ chrome.extension.sendMessage({}, function(response) {
 	var readyStateCheckInterval = setInterval(function() {
 	if (document.readyState === "complete") {
 		clearInterval(readyStateCheckInterval);
-		domain = 'sci-hub.tw';
+		domain = 'sci-hub.do';
 		
 		var checkp = $('#sci-hub-plugin-check');
 		if (checkp.length)
@@ -37,7 +37,7 @@ chrome.extension.sendMessage({}, function(response) {
 		var panel = '<div class="donate"><a target = "_blank" href = "//vk.com/sci_hub">страничка проекта Sci-Hub в социальных сетях &rarr;</a> </div>' +
 					'<div id="arovswmd_panel"><a target = "_blank" href = "https://' + domain +
 					'/"><div id="arovswmd_logo">Sci-Hub</div></a><div id="arovswmd_input"><input id="arovswmd_url" type="text" value = "' +
-					request + '"><p>URL статьи или журнала, или DOI, или строка для поиска</p></div><div id="arovswmd_open">▶</div><div id="arovswmd_feedback"><a href="http://' +
+					request + '"><p>URL статьи или журнала, или DOI, или строка для поиска</p></div><div id="arovswmd_open">▶</div><div id="arovswmd_feedback"><a href="https://' +
 					domain + '/donate" target="blank"><span>Помочь проекту</span><img border="0" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAW0lEQVR42mNgoDWYNWvWf2IwVQwhaBhMASFAskHYXEF7g3ApxmUYVoNwBSLJLsKlEd0QXHIkGURUrOEziKToJyZMiEqQxMQSUamaGK+QlLeoZhDFuZ1YwxjoAQD9DZbacIL0GQAAAABJRU5ErkJggg==" /></a></div></div>';
 
 		var google = $('#gs_hdr');

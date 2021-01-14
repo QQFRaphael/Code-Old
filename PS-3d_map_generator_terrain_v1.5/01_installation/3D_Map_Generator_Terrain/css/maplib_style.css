@@ -1,0 +1,274 @@
+﻿/*------------------------------------*\
+    #1 - RESET & CLEARFIX
+\*------------------------------------*/
+/**
+* Eric Meyer's CSS Reset + Nicolas Gallagher's Clearfix
+* https://github.com/reefat/css-reset
+*/
+ 
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+button {
+    background: none;
+    border: 0;
+    cursor: pointer;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+}
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+.clearfix:after {
+    clear: both;
+}
+.clearfix {
+    *zoom: 1;
+}
+main, section, article, footer, header {
+    display: block;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+*,
+:after,
+:before {
+    box-sizing: border-box;
+}
+ 
+ 
+ 
+ 
+ 
+ 
+/*------------------------------------*\
+    #1 - GLOBAL
+\*------------------------------------*/
+ 
+body {
+    background-color: #202020;
+    color: #a5a5a5;
+    font-size: 12px;
+    line-height: 12px;
+    font-family: Arial, sans-serif;
+    -webkit-user-select: none;
+    overflow: hidden;
+}
+body.plugin {
+    background-repeat: no-repeat;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+}
+strong {
+    font-weight: bold;
+}
+h2 {
+    color: #636363;
+    font-size: 12px;
+    line-height: 1em;
+    margin-bottom: 5px;
+    text-align: center;
+}
+.wrapper {
+    overflow: hidden;
+    text-align: center;
+}
+.wrap {
+    padding: 0 10px;
+}
+.top-nav {
+
+    border-radius: 3px;
+    padding: 5px;
+
+}
+    .top-nav li {
+        border-radius: 3px;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+    .top-nav li:hover,
+    .top-nav li:focus {
+        background-color: #313131;
+    }
+    .top-nav li.active {
+        box-shadow: 0px 0px 0px 2px #1473e6 inset;
+    }
+.content {
+    height: 510px;
+    max-height: 510px;
+    overflow: hidden;
+}
+    .content iframe {
+        width: 100%;
+        height: 510px;
+    }
+
+
+p {
+    margin-bottom: 10px;
+}
+
+.headline {
+    color: #5d5d6d;
+    font-size: 24px;
+    line-height: 1em;
+    padding-bottom: 15px;
+    padding-top: 10px
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 60px;
+}
+
+button {
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #363843;
+    color: #363843;
+    text-align: center;
+    font-size: 16px;
+    line-height: 33px;
+    padding: 0 25px;
+    margin-bottom: 50px;
+}
+button:hover {
+    /*background-color: #4b4b4b;*/
+}
+    
+.t-center {
+    text-align: center;
+}
+.f-left {
+    float: left;
+}
+.f-right {
+    position: absolute;
+    top: 6px;
+    right: 12px;
+}
+
+
+   
+   
+/*------------------------------------*\
+    #1 - MODAL
+\*------------------------------------*/
+
+.jquery-modal.blocker {
+    opacity: 1 !important;
+}
+ 
+.modal {
+    background-color: #171717 !important;
+    border-radius: 0 !important;
+    box-sizing: border-box !important;
+    color: #fff;
+    top: 0 !important;
+    left: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 100% !important;
+    width: 100% !important;
+}
+
+.modal-help {
+    display: none;
+    color: #606060;
+}
+    .modal-help p {
+        font-size: 14px;
+        line-height: 1.3em;
+        text-align: left;
+    }
+ 
+.uninstall {
+    cursor: pointer;
+    }
+
+/*------------------------------------*\
+    #1 - UI ELEMENTS
+\*------------------------------------*/  
+ 
+::-webkit-scrollbar {
+    width: 8px;
+}
+.modal-examples ::-webkit-scrollbar {
+    width: 0px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #212121;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #4e4e4e;
+    //-webkit-box-shadow: inset 0 0 4px #4e4e4e;
+    border: 1px solid #4e4e4e;
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: #717171;
+
+    }
+
+
+
+#isocons {
+    
+    }
+/* icon_lib*/
+
+/*#myIconLib label { color: #5f6b70; margin: 0px 0px 4px 0px; }*/
+#myIconLib .section { width: 280px; padding: 0px 0px 0px 0px; margin-top: 10px;}
+#myIconLib .createyourown .icons { height: 450px; overflow: auto; margin-bottom: 10px; margin-top: 10px;}
+#myIconLib .createyourown .icons span { width: 80px; height: 80px; display: inline-block; background: no-repeat 0 0; border-radius: 5px; background: #272727; margin: 1px 10px 7px 0px; position: relative; background-size: 80px 80px; }
+#myIconLib .createyourown .icons span:hover { box-shadow: 0px 0px 0px 2px #1473e6 inset; cursor: pointer; }

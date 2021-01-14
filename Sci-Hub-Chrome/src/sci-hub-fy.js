@@ -1,7 +1,7 @@
-var sciHubPlugin = '0.0.9';
+var sciHubPlugin = '0.2';
 
 chrome.browserAction.onClicked.addListener(function(tab) {
-	var url = 'https://sci-hub.tw/';
+	var url = 'https://sci-hub.do/';
 	if (tab.url.indexOf('sci-hub.') < 0
 		&& tab.url.indexOf('scholar.google') < 0
 		&& tab.url.indexOf('.') > 0)

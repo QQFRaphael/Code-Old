@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+    <ExtensionManifest Version="5.0" ExtensionBundleId="3D_MAP_GENERATOR_TERRAIN.extension" ExtensionBundleVersion="1.4" ExtensionBundleName="3D_MAP_GENERATOR_TERRAIN" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <ExtensionList>
+        <Extension Id="3D_MAP_GENERATOR_TERRAIN_1_5.extension" Version="1.5" />
+    </ExtensionList>
+    <ExecutionEnvironment>
+        <HostList>
+          <Host Name="PHXS" Version="14.0" />´
+		<Host Name="PHSP" Version="14.0" />
+        </HostList>
+        <LocaleList>
+            <Locale Code="All" />
+        </LocaleList>
+        <RequiredRuntimeList>
+            <RequiredRuntime Name="CSXS" Version="5.0" />
+        </RequiredRuntimeList>
+    </ExecutionEnvironment>
+    <DispatchInfoList>
+        <Extension Id="3D_MAP_GENERATOR_TERRAIN_1_5.extension">          
+             <DispatchInfo>
+                <Resources>
+                    <MainPath>./index.html</MainPath>
+                    <ScriptPath>./host/ps.jsx</ScriptPath>
+                </Resources>
+                	<Lifecycle>
+					<AutoVisible>true</AutoVisible>
+				</Lifecycle>
+                <UI>
+                    <Type>Panel</Type>
+                    <Menu>3D Map Generator - Terrain</Menu>
+                    <Geometry>
+                        <Size>
+                            <Height>536</Height>
+                            <Width>300</Width>
+                        </Size>
+                        <MaxSize>
+							<Height>700</Height>
+							<Width>400</Width>
+						</MaxSize>
+						<MinSize>
+							<Height>536</Height>
+							<Width>300</Width>
+						</MinSize>
+                    </Geometry>
+                    <Icons>
+						<Icon Type="Normal">./thumb_1</Icon>
+						<Icon Type="RollOver">./thumb_1.png</Icon>
+						<Icon Type="Disabled">./thumb_1.png</Icon>
+						<Icon Type="DarkNormal">./thumb_1.png</Icon>
+						<Icon Type="DarkRollOver">./thumb_1.png</Icon>
+					</Icons>
+                </UI>
+            </DispatchInfo>
+        </Extension>
+    </DispatchInfoList>
+</ExtensionManifest>

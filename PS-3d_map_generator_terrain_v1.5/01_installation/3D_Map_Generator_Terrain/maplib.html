@@ -1,0 +1,43 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="de">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="js/jquery.modal.min.js" type="text/javascript"></script>
+    <script src="js/maplib_main.js" type="text/javascript"></script>
+    <script src="js/maplib_script.js" type="text/javascript"></script>
+    <script src="js/maplib_mylib.js" type="text/javascript"></script>
+    <script src="js/CSInterface.js"></script>
+    <link rel="stylesheet" href="css/maplib_style.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery.modal.css" type="text/css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="wrap">
+            <div class="top-nav">
+                <ul class="clearfix">
+                    <li onClick="addFX()" class="js-add f-left"><img src="img/maplib_load.png" /></a></li>
+                    <li onClick="saveMap()" class="js-add f-left"><img src="img/maplib_add.png" /></a></li>
+                    <li class="js-delete f-left" id="c1"><img src="img/maplib_delete.png" /></li>
+                    <li onClick="refresh()" class="js-refresh f-left"><img src="img/maplib_refresh.png" /></li>
+                    <a href="3dmap.html"><img class="js-help f-right" src="img/maplib_close.png" /></a>
+                </ul>
+                <span style="margin-top: 2px; color: #636363; float: left;"></span>
+            </div>
+            <div class="content">
+                <div class="clearfix" id="myIconLib">
+                    <div class="section createyourown">
+                        <div id="isocons"> </div>
+                        <div id="container" class="icons"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+      
+</body>
+
+</html>

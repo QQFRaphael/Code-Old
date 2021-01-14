@@ -1,0 +1,302 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="de">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>3D Map</title>
+        <script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
+        <script src="js/jquery.modal.min.js" type="text/javascript"></script>
+        <script src="js/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="js/jquery-slider-pips.js" type="text/javascript"></script>
+        <script src="js/script.js" type="text/javascript"></script>
+
+        <script src="js/tab_3dmap.js" type="text/javascript"></script>
+        <script src="js/CSInterface.js"></script>
+
+        
+        <link rel="stylesheet" href="css/jquery-ui.min.css">
+        <link rel="stylesheet" href="css/style.css" type="text/css">
+        <link rel="stylesheet" href="css/jquery.modal.css" type="text/css">
+    </head>
+    <body class="3dmap">
+    
+        <div class="wrapper">
+            <div class="navigation inline clearfix">
+                <a href="index.html"><img class="js-back f-left" src="img/navi-icon-home.png" /></a>
+                <a href="styling.html"><img class="js-back f-left-h" src="img/navi-icon-next.png" /></a>
+                <img class="js-help f-right" src="img/navi-icon-help.png" />
+                <img onClick="urlHeightmapper()" class="f-right-hm" src="img/navi-icon-heightmapper.png" />
+                <img  style="margin-right: 10px;" onClick="maplib()" class="f-right-hm" src="img/maplib_map.png" />
+            </div>
+            
+            <div class="tool--wrap">
+                <div class="tool--map-project clearfix">
+                    <h2>New Heightmap Document (W x H)</h2>
+                    <div class="f-left">
+                        <input type="text" id="docWide" value="600" />
+                        <span style="display: inline-block; margin: 0 10px; font-size: 10px;">x</span>
+                        <input type="text" id="docHeight" value="600" />
+                        <span style="display: inline-block; margin-left: 9px; font-size: 10px;">px</span>
+                    </div>
+                    <div class="f-right">
+                        <button onClick="process(newDoc)" class="btn btn-blue">Create</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tool--wrap">
+                <div class="tool--height-map clearfix">
+                    <h2>Create Heightmap</h2>
+                    <ul class="clearfix inline center grid-3">
+                        <li>
+                            <div class="icon-box" onclick="OpenModal('brushes')">
+                                <div class="wrap">
+                                    <img src="img/icons_map/icon-brush.png" /><br>
+                                    Drawing tools
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icon-box">
+                                <div onClick="addNewHelper()" class="wrap">
+                                    <img src="img/icons_map/icon-gradient.png" /><br>
+                                    Gradient Helper
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icon-box">
+                                <div onclick="OpenModal('map')" class="wrap">
+                                    <img src="img/icons_map/icon-map.png" /><br>
+                                    Top-View Map
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <hr />
+                    <ul class="clearfix inline center grid-3">
+                        <li>
+                            <div class="slider-wrap" id="slider_blur">
+                                <div class="js-slider-value" style="opacity: 0">1</div>
+                                <div class="js-slider" data-value="1" data-min="1" data-max="10" data-step="1"></div>
+                            </div>
+                            <button onclick="blurMe()" class="btn">Blur</button>
+                        </li>
+                        <li>
+                            <div class="slider-wrap" id="slider_melt">
+                                <div class="js-slider-value" style="opacity: 0">1</div>
+                                <div class="js-slider" data-value="1" data-min="1" data-max="10" data-step="1"></div>
+                            </div>
+                            <button onClick="meltMe()" class="btn">Melt</button>
+                        </li>
+                        <li style="padding-top: 5px;">
+                        <div class="icon-box">
+                                <div onclick="OpenModal('heightmaps')" class="wrap">
+                                    <img src="img/icons_map/icon-height-1.png" /><br>
+                                    Auto Heightmaps
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="tool--wrap">
+                <div class="tool--map-strength clearfix">
+                    <h2>Set Terrain Elevation</h2>
+                    <img src="img/icons_map/icon-strength-low.png" />
+                    <div class="slider-wrap" id="slider_terrain">
+                        <div class="js-slider slider-rips" data-value="3" data-min="1" data-max="5" data-step="1"></div>
+                    </div>
+                    <img src="img/icons_map/icon-strength-high.png" />
+                    <hr />
+                    <h2>Create 3D Terrain</h2>
+                    <ul class="clearfix inline center grid-3">
+                        <li>
+                            <div class="icon-box">
+                                <div  onClick="process(go_nDoc_left);" class="wrap">
+                                    <img  style="margin-bottom: 13px;" src="img/icons_map/icon-arrow-left.png" /><br>
+                                    Left
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icon-box">
+                                <div onClick="process(go_nDoc_frontal);" class="wrap">
+                                    <img style="margin-bottom: 13px;" src="img/icons_map/icon-arrow-frontal.png" /><br>
+                                    Frontal
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icon-box">
+                                <div onClick="process(go_nDoc_right);" class="wrap">
+                                    <img style="margin-bottom: 13px;" src="img/icons_map/icon-arrow-right.png" /><br>
+                                    Right
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="modal-brushes">
+            <div class="header">
+                <a class="modal-close" href="#close" rel="modal:close"><img src="img/close.png" alt="close" /></a>
+            </div>
+            <div style="padding: 0 20px;">
+                <h2 style="margin-bottom: 9px;">Brushes</h2>
+            </div>
+            <div style="padding: 0 10px 0 20px;">
+                <ul class="selector">
+                    <li onclick="selectBrush('50', 'i3dmg_terrain_hard_10px')" style="background-image: url('img/brushes_thumbs/brush_01.png')"></li>
+                    <li onclick="selectBrush('50', 'i3dmg_terrain_pressure')" style="background-image: url('img/brushes_thumbs/brush_02.png')"></li>
+                    <li onclick="selectBrush('100', 'i3dmg_terrain_soft_alpha')" style="background-image: url('img/brushes_thumbs/brush_15.png')"></li>
+                    <li onclick="selectBrush('100', 'i3dmg_terrain_soft')" style="background-image: url('img/brushes_thumbs/brush_03.png')"></li>
+                    <li onclick="selectBrush('500', 'i3dmg_terrain_heights_01')" style="background-image: url('img/brushes_thumbs/brush_05.png')"></li>
+                    <li onclick="selectBrush('500', 'i3dmg_terrain_heights_02')" style="background-image: url('img/brushes_thumbs/brush_06.png')"></li>
+                    <li onclick="selectBrush('500', 'i3dmg_terrain_heights_03')" style="background-image: url('img/brushes_thumbs/brush_07.png')"></li>
+                    <li onclick="selectBrush('500', 'i3dmg_terrain_heights_17')" style="background-image: url('img/brushes_thumbs/brush_22.png')"></li>
+                    <li onclick="selectBrush('500', 'i3dmg_terrain_heights_04')" style="background-image: url('img/brushes_thumbs/brush_08.png')"></li>
+                    <li onclick="selectBrush('500', 'i3dmg_terrain_heights_05')" style="background-image: url('img/brushes_thumbs/brush_09.png')"></li>
+                    <li onclick="selectBrush('500', 'i3dmg_terrain_heights_06')" style="background-image: url('img/brushes_thumbs/brush_10.png')"></li>
+                    <li onclick="selectBrush('500', 'i3dmg_terrain_heights_07')" style="background-image: url('img/brushes_thumbs/brush_11.png')"></li>
+                    <li onclick="selectBrush('500', 'i3dmg_terrain_heights_08')" style="background-image: url('img/brushes_thumbs/brush_12.png')"></li>
+                    <li onclick="selectBrush('500', 'i3dmg_terrain_heights_09')" style="background-image: url('img/brushes_thumbs/brush_13.png')"></li>
+                    <li onclick="selectBrush('500', 'i3dmg_terrain_heights_10')" style="background-image: url('img/brushes_thumbs/brush_14.png')"></li>
+                    <li onclick="selectBrush('500', 'i3dmg_terrain_heights_11')" style="background-image: url('img/brushes_thumbs/brush_16.png')"></li>
+                    <li onclick="selectBrush('500', 'i3dmg_terrain_heights_12')" style="background-image: url('img/brushes_thumbs/brush_17.png')"></li>
+                    <li onclick="selectBrush('500', 'i3dmg_terrain_heights_13')" style="background-image: url('img/brushes_thumbs/brush_18.png')"></li>
+                    <li onclick="selectBrush('500', 'i3dmg_terrain_heights_14')" style="background-image: url('img/brushes_thumbs/brush_19.png')"></li>
+                    <li onclick="selectBrush('500', 'i3dmg_terrain_heights_15')" style="background-image: url('img/brushes_thumbs/brush_20.png')"></li>
+                    <li onclick="selectBrush('500', 'i3dmg_terrain_heights_16')" style="background-image: url('img/brushes_thumbs/brush_21.png')"></li>                    
+                </ul>
+            </div>
+            <hr style="margin: 19px auto 15px auto;" />
+            <div class="padding-wrap">
+                <h2 style="margin-bottom: 35px">Set Height and Depth Color</h2>
+                <div class="clearfix">
+                    <span style="margin-top: 2px; color: #636363; float: left;">0</span>
+                    <div class="slider-wrap f-left" id="slider_gradient" style="width: 155px; margin: 0 20px;">
+                        <div class="js-slider gradient" data-value="250" data-min="0" data-max="500" data-step="5"></div>
+                    </div>
+                    <input style="margin-top: -20px;" class="js-slider-input f-right" type="text" value="500" />
+                </div>
+            </div>
+            <hr style="margin: 14px auto 9px auto;" />
+            <div class="padding-wrap">
+                <ul class="clearfix inline center grid-3">
+                    <li>
+                        <div class="slider-wrap" id="slider_brushes_blur">
+                            <div class="js-slider-value" style="opacity: 0;">1</div>
+                            <div class="js-slider" data-value="1" data-min="1" data-max="10" data-step="1"></div>
+                        </div>
+                        <button onclick="blurMe2()" class="btn" style="margin-top: 10px;">Blur</button>
+                    </li>
+                    <li>
+                        <div class="slider-wrap" id="slider_brushes_melt" >
+                            <div class="js-slider-value" style="opacity: 0;">1</div>
+                            <div class="js-slider" data-value="1" data-min="1" data-max="10" data-step="1"></div>
+                        </div>
+                        <button onclick="meltMe2()" class="btn" style="margin-top: 10px;">Melt</button>
+                    </li>
+                    <li style="padding-top: 5px;">
+                        <span style="color: #636363;">New Empty Layer</span>
+                        <button onclick="addNewLayer()" class="btn" style="margin-top: 12px">Add</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="modal-map">
+            <div class="header">
+                <a class="modal-close" href="#close" rel="modal:close"><img src="img/close.png" alt="close" /></a>
+            </div>
+            <div style="padding: 0 20px;">
+                <div class="tool--map-strength clearfix">
+                    <h2 style="margin-bottom: 25px;">Set Terrain Elevation</h2>
+                    <img src="img/icons_map/icon-strength-null.png" />
+                    <div class="slider-wrap" id="slider_top_view">
+                        <div class="js-slider slider-rips" data-value="0" data-min="0" data-max="5" data-step="1"></div>
+                    </div>
+                    <img src="img/icons_map/icon-strength-high.png" />
+                </div>
+
+
+                <div style="margin-top: 25px; text-align: center;">
+                    <div class="checkbox active" id="c1"><img src="img/icon_check.png" /></div>
+                    <label>with legend</label>
+                </div>
+                    
+                
+                <h2 style="margin-bottom: 10px; margin-top: 20px;">Select a Map Design</h2>
+                <ul class="map-list clearfix center">
+                    <li onclick="topView('topViewMap01')" style="background-image: url('img/top_view_maps/top_view_map_01.png')"></li>
+                    <li onclick="topView('topViewMap02')" style="background-image: url('img/top_view_maps/top_view_map_02.png')"></li>
+                    <li onclick="topView('topViewMap03')" style="background-image: url('img/top_view_maps/top_view_map_03.png')"></li>
+                    <li onclick="topView('topViewMap04')" style="background-image: url('img/top_view_maps/top_view_map_04.png')"></li>
+                    <li onclick="topView('topViewMap05')" style="background-image: url('img/top_view_maps/top_view_map_05.png')"></li>
+                    <li onclick="topView('topViewMap06')" style="background-image: url('img/top_view_maps/top_view_map_06.png')"></li>
+                </ul>
+            </div>
+        </div>
+        
+<div class="modal-heightmaps">
+        <div class="header">
+            <a class="modal-close" href="#close" rel="modal:close"><img src="img/close.png" alt="close" /></a>
+        </div>
+        <div style="padding: 0 20px;">
+            <h2 style="margin-bottom: 9px;">Auto Heightmaps</h2>
+        </div>
+        <div style="padding: 0 10px 0 20px;">
+            <ul class="selector alternative">
+                <li onClick="random_terrain_1()" style="background-image: url('img/hm_thumbs/i3dmgt_hmg_01.jpg')"></li>
+                <li onClick="random_terrain_2()" style="background-image: url('img/hm_thumbs/i3dmgt_hmg_02.jpg')"></li>
+                <li onClick="random_heightmap('random_heightmap_03')" style="background-image: url('img/hm_thumbs/i3dmgt_hmg_03.jpg')"></li>
+                <li onClick="random_heightmap('random_heightmap_04')" style="background-image: url('img/hm_thumbs/i3dmgt_hmg_04.jpg')"></li>
+                <li onClick="random_heightmap('random_heightmap_05')" style="background-image: url('img/hm_thumbs/i3dmgt_hmg_05.jpg')"></li>
+                <li onClick="random_heightmap('random_heightmap_06')" style="background-image: url('img/hm_thumbs/i3dmgt_hmg_06.jpg')"></li>
+                <li onClick="random_heightmap('random_heightmap_07')" style="background-image: url('img/hm_thumbs/i3dmgt_hmg_07.jpg')"></li>
+
+            </ul>
+        </div>
+    </div>        
+        
+        
+        <div class="modal-help">
+            <div class="header">
+                <a class="modal-close" href="#close" rel="modal:close"><img src="img/close.png" alt="close" /></a>
+            </div>
+            <div style="padding: 0 20px;">
+                <h2>Help</h2>
+            </div>
+            <div style="padding-right: 10px;">
+                <div style="padding: 0 10px 0 20px; max-height: 430px; overflow-y: scroll;">
+                    <p>1. Read the instructions PDF carefully</p>
+                    <p>2. Open or create a heightmap project</p>
+                    <p>3. Use the heightmap tools and brushes</p>
+                    <p>4. Click on the globe  icon at  the top of the panel for the <a style="color:#1473e6;" href="#" onClick="urlHeightmapper()">Heightmapper</a>. Search for the desired area from around the world, export and open the heightmap in Photoshop</p>
+                    <p>6. To give the 3D Map an own base shape, create a new layer named "shape". This shape layer can contain vector objects, text, pixel or SmartObjects.</p>
+                    <p>7. Set the terrain elevation</p>
+                    <p>8. Choose on of the three isometric map directions (left, frontal, right) to create the 3D Map terrain</p>
+                    <p>9. The generation process may take several minutes, depending on the map size</p>
+                    <p>10. If you want to style an already done 3D Terrain project click the arrow icon at the top of the panel</p>
+                    <p>TIPP: minimize Photoshop during the generation process to shorten the editing time significantly</p>
+                    <p>11. Please click to refresh the plugin<div ><img onClick="refreshPanel()" src="img/010_install/btn_refresh.png"></div></p>
+                    <p>12. Please click to uninstall the 3D Map Generator - Terrain<div class="uninstall"><img onClick="uninstall()" src="img/010_install/btn_uninstall.png"></div></p>
+                    <p></br>More tutorials and help on: </br><a style="color:#1473e6;" href="#" onClick="urlHome()">www.3d-map-generator.com</a></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal-loading">
+            <div>
+                <img src="img/logo_ani_process.gif" alt="loading" />
+                <h4>Please be patient!</h4>
+                <h3>App in progress.</h3>
+            </div>
+        </div>
+
+    </body>
+</html>

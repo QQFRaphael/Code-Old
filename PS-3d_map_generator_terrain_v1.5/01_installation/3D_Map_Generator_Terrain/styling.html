@@ -1,0 +1,351 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="de">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Styling</title>
+        <script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
+        <script src="js/jquery.modal.min.js" type="text/javascript"></script>
+        <script src="js/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="js/jquery-slider-pips.js" type="text/javascript"></script>
+        <script src="js/script.js" type="text/javascript"></script>
+        
+        <script src="js/tab_styling.js" type="text/javascript"></script>
+        <script src="js/CSInterface.js"></script>
+        
+        <link rel="stylesheet" href="css/jquery-ui.min.css">
+        <link rel="stylesheet" href="css/style.css" type="text/css">
+        <link rel="stylesheet" href="css/jquery.modal.css" type="text/css">
+    </head>
+    <body class="3dmap">
+        <div class="wrapper">
+            <div class="navigation inline clearfix">
+                <a href="index.html"><img class="js-back f-left" src="img/navi-icon-home.png" /></a>
+                <a href="3dmap.html"><img class="js-back f-left-h" src="img/navi-icon-back.png" /></a>
+                <img class="js-help f-right" src="img/navi-icon-help.png" />
+            </div>
+            
+            <div class="sub-navi inline clearfix">
+                <a class="active" href="styling.html">Styling</a>
+                <a href="icons.html">Icons</a>
+            </div>
+            
+            <div class="tool--wrap">
+                <div class="tool--surface clearfix">
+                    <h2>Surface</h2>
+                    <ul class="clearfix inline center grid-3">
+                        <li>
+                            <div class="icon-box" onclick="OpenModal('gradients')">
+                                <div class="wrap">
+                                    <img src="img/icons_styling/icon-gradients.png" /><br>
+                                    Gradients
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icon-box" onclick="go_openTL(); OpenModal('textures');">
+                                <div class="wrap">
+                                    <img src="img/icons_styling/icon-texturing.png" /><br>
+                                    Texturing
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icon-box" onclick="OpenModal('backgrounds')">
+                                <div class="wrap">
+                                    <img src="img/icons_styling/icon-grounds.png" /><br>
+                                    Grounds
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="tool--wrap">
+                <div class="tool--contours clearfix">
+                    <h2>Contour Lines</h2>
+                    <div class="wrap">
+                        <div class="slider-wrap" id="slider_contour">
+                            <div class="js-slider slider-contours"></div>
+                        </div>
+                        <label>Distance</label>
+                    </div>
+                    <div class="wrap">
+                        <button onClick="process(go_contour_lines)" class="btn">Add</button>
+                        <button onClick="process(go_del_contour_lines)" class="btn">Clear</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tool--wrap">
+                <div class="tool--water clearfix">
+                    <h2>Water Level</h2>
+                    <input class="js-input-number" id="waterlevelvalue" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" min="1" max="9" value="5" maxlength="1"  />
+                    <span style="display: inline-block; margin: 0 10px; font-size: 10px;">px</span>
+                    <ul class="clearfix inline center">
+                        <li>
+                            <button onClick="process(go_waterUp)" class="btn"><img src="img/icons_styling/icon-up.png" /></button>
+                        </li>
+                        <li>
+                            <button onClick="process(go_waterDown)" class="btn"><img src="img/icons_styling/icon-down.png" /></button>
+                        </li>
+                        <li>
+                            <button onClick="process(go_waterVisi)" class="btn">on / off</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="tool--wrap">
+                <div class="tool--misc clearfix">
+                    <h2>Map Layer Height</h2>
+                    <h2>Global Light</h2>
+                    <ul class="clearfix inline center grid-3">
+                        <li>
+                            <button onClick="process(go_addLay)"class="btn">Add</button>
+                        </li>
+                        <li>
+                            <button onClick="process(go_delLay)"class="btn">Delete</button>
+                        </li>
+                        <li onClick="gl()" class="hover" data-src="img/icons_styling/icon-global-light_hover.png" style="margin-top: -5px; margin-bottom: -5px;">
+                            <img src="img/icons_styling/icon-global-light.png" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="tool--wrap">
+                <div class="tool--drawings clearfix">
+                    <h2>Surface Drawing Tools</h2>
+                    <ul class="clearfix inline grid-4">
+                    <li onclick="process(efx_grain)" class="hover" data-src="img/icons_styling/icon-drawing-0_hover.png">
+                            <img src="img/icons_styling/icon-drawing-0.png" />
+                        </li>
+                         <li onclick="process(efx_clouds)" class="hover" data-src="img/icons_styling/icon-drawing-5_hover.png">
+                            <img src="img/icons_styling/icon-drawing-5.png" />
+                        </li>
+                        <li onclick="efx_brushes('trees_1_3dmgterrain', '10', 'i3dmg_terrain_trees_1')" class="hover" data-src="img/icons_styling/icon-drawing-1_hover.png">
+                            <img src="img/icons_styling/icon-drawing-1.png" />
+                        </li>
+                        <li onclick="efx_brushes('trees_2_3dmgterrain', '10', 'i3dmg_terrain_trees_2')" class="hover" data-src="img/icons_styling/icon-drawing-2_hover.png">
+                            <img src="img/icons_styling/icon-drawing-2.png" />
+                        </li>
+                        <li onclick="efx_brushes('water_3dmgterrain', '5', 'i3dmg_terrain_pressure')" class="hover" data-src="img/icons_styling/icon-drawing-3_hover.png">
+                            <img src="img/icons_styling/icon-drawing-3.png" />
+                        </li>
+                          <li onclick="efx_brushes('road_3dmgterrain', '5', 'i3dmg_terrain_road_iso')" class="hover" data-src="img/icons_styling/icon-drawing-4_hover.png">
+                            <img src="img/icons_styling/icon-drawing-4.png" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+        
+        
+        <div class="modal-gradients">
+            <div class="header">
+                <a class="modal-close" onClick="go_closeTL()" href="#close" rel="modal:close"><img src="img/close.png" alt="close" /></a>
+            </div>
+            <div style="padding: 0 20px;">
+                <h2 style="margin-bottom: 9px;">Gradient Presets</h2>
+            </div>
+            <div style="padding: 0 10px 0 20px;">
+                <ul class="selector">
+                    <li onClick="startGradient('gradient001')" style="background-image: url('img/gradient_thumbs/gm_001.png')"></li>
+                    <li onClick="startGradient('gradient002')" style="background-image: url('img/gradient_thumbs/gm_002.png')"></li>
+                    <li onClick="startGradient('gradient003')" style="background-image: url('img/gradient_thumbs/gm_003.png')"></li>
+                    <li onClick="startGradient('gradient004')" style="background-image: url('img/gradient_thumbs/gm_004.png')"></li>
+                    <li onClick="startGradient('gradient005')" style="background-image: url('img/gradient_thumbs/gm_005.png')"></li>
+                    <li onClick="startGradient('gradient006')" style="background-image: url('img/gradient_thumbs/gm_006.png')"></li>
+                    <li onClick="startGradient('gradient007')" style="background-image: url('img/gradient_thumbs/gm_007.png')"></li>
+                    <li onClick="startGradient('gradient008')" style="background-image: url('img/gradient_thumbs/gm_008.png')"></li>
+                    <li onClick="startGradient('gradient009')" style="background-image: url('img/gradient_thumbs/gm_009.png')"></li>
+                    <li onClick="startGradient('gradient010')" style="background-image: url('img/gradient_thumbs/gm_010.png')"></li>
+                    <li onClick="startGradient('gradient011')" style="background-image: url('img/gradient_thumbs/gm_011.png')"></li>
+                    <li onClick="startGradient('gradient012')" style="background-image: url('img/gradient_thumbs/gm_012.png')"></li>
+                    <li onClick="startGradient('gradient013')" style="background-image: url('img/gradient_thumbs/gm_013.png')"></li>
+                    <li onClick="startGradient('gradient014')" style="background-image: url('img/gradient_thumbs/gm_014.png')"></li>
+                    <li onClick="startSpecialGPScale()" style="background-image: url('img/gradient_thumbs/gm_015.png')"></li>
+                    <li onClick="startGradient('gradient016')" style="background-image: url('img/gradient_thumbs/gm_016.png')"></li>
+                </ul>
+            </div>
+            <hr style="margin: 19px auto 15px auto;" />
+            <h2 style="margin-bottom: 17px;">Edit Gradient</h2>
+            <div class="padding-wrap">
+                <ul class="clearfix inline center grid-3">
+                    <li style="width: 105px; max-width: 105px;">
+                        <button onclick="go_openTL_gradient()" class="btn">Edit Gradient</button>
+                    </li>
+                    <li style="width: 67px; max-width: 67px;">
+                        <button onClick="go_closeTL_gradient()" class="btn">Cancel</button>
+                    </li>
+                    <li style="width: 59px; max-width: 59px;">
+                        <button onClick="process(go_saveTL)" class="btn btn-blue">Save</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="modal-textures">
+            <div class="header">
+                <a class="modal-close" onClick="go_closeTL()" href="#close" rel="modal:close"><img src="img/close.png" alt="close" /></a>
+                 <img onClick="process(customLayerEdgeColor)" class="f-left-tex" src="img/navi-icon-colorpicker_lec.png" />
+                 <img onClick="setGuides()" class="f-left-tex2" src="img/navi-icon_guides.png" />
+            </div>
+            <div style="padding: 0 20px;">
+                <h2 style="margin-bottom: 20px; margin-top: 20px;"><span class="switch-textures active" data-id="1">Textures</span><span class="switch-textures" data-id="2">Auto-Textures</span><span class="switch-textures" data-id="3">Auto-Maps</span></h2>
+            </div>
+            <div class="textures-wrap active" data-id="1">
+                <div style="padding: 0 10px 0 20px;">
+                    <ul class="selector">
+                        <li onclick="addTextureLayer('i3dmgt_tx_01', '50', 'i3dmg_terrain_soft')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_01.png')"></li>
+                        <li onclick="addTextureLayer('i3dmgt_tx_02', '50', 'i3dmg_terrain_soft')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_02.png')"></li>
+                        <li onclick="addTextureLayer('i3dmgt_tx_03', '50', 'i3dmg_terrain_soft')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_03.png')"></li>
+                        <li onclick="addTextureLayer('i3dmgt_tx_04', '50', 'i3dmg_terrain_soft')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_04.png')"></li>
+                        <li onclick="addTextureLayer('i3dmgt_tx_05', '50', 'i3dmg_terrain_soft')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_05.png')"></li>
+                        <li onclick="addTextureLayer('i3dmgt_tx_06', '50', 'i3dmg_terrain_soft')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_06.png')"></li>
+                        <li onclick="addTextureLayer('i3dmgt_tx_07', '50', 'i3dmg_terrain_soft')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_07.png')"></li>
+                        <li onclick="addTextureLayer('i3dmgt_tx_15', '50', 'i3dmg_terrain_soft')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_19.png')"></li>
+                        <li onclick="addTextureLayer('i3dmgt_tx_16', '50', 'i3dmg_terrain_soft')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_20.png')"></li>
+                        <li onclick="addTextureLayer('i3dmgt_tx_08', '50', 'i3dmg_terrain_soft')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_08.png')"></li>
+                        <li onclick="addTextureLayer('i3dmgt_tx_09', '50', 'i3dmg_terrain_soft')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_09.png')"></li>
+                        <li onclick="addTextureLayer('i3dmgt_tx_10', '50', 'i3dmg_terrain_soft')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_10.png')"></li>
+                        <li onclick="addTextureLayer('i3dmgt_tx_11', '10', 'i3dmg_terrain_hard_10px')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_11.png')"></li>
+                        <li onclick="addTextureLayer('i3dmgt_tx_17', '10', 'i3dmg_terrain_hard_10px')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_21.png')"></li>
+                        <li onclick="addTextureLayer('i3dmgt_tx_12', '10', 'i3dmg_terrain_pressure')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_12.png')"></li>
+                        <li onclick="addTextureLayer('i3dmgt_tx_13', '50', 'i3dmg_terrain_soft')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_13.png')"></li>
+                        <li onclick="addTextureLayer('i3dmgt_tx_14', '50', 'i3dmg_terrain_soft')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_14.png')"></li>
+                        <li onclick="addTextureLayer('i3dmgt_tx_18', '50', 'i3dmg_terrain_soft')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_22.png')"></li>
+                        <li onclick="addTextureLayer('i3dmgt_tx_21', '50', 'i3dmg_terrain_hard_10px')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_24.png')"></li>
+                        <li onclick="addTextureLayer('i3dmgt_tx_22', '50', 'i3dmg_terrain_hard_10px')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_25.png')"></li>
+                        <li onclick="addTextureLayer('i3dmgt_tx_23', '50', 'i3dmg_terrain_hard_10px')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_26.png')"></li>
+                        <li onclick="addTextureLayer('i3dmgt_tx_24', '50', 'i3dmg_terrain_hard_10px')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_27.png')"></li>
+                        <li onclick="addTextureLayer('i3dmgt_tx_25', '50', 'i3dmg_terrain_hard_10px')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_28.png')"></li>
+                        <li onclick="addTextureLayer('i3dmgt_tx_26', '50', 'i3dmg_terrain_hard_10px')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_29.png')"></li>
+                        <li onclick="addTextureLayer('i3dmgt_tx_27', '50', 'i3dmg_terrain_hard_10px')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_30.png')"></li>
+                        <li onclick="addGridLayer('i3dmgt_tx_grid_100_b2')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_15.png')"></li>
+                        <li onclick="addGridLayer('i3dmgt_tx_grid_100_b1')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_16.png')"></li>
+                        <li onclick="addGridLayer('i3dmgt_tx_grid_100_w2')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_17.png')"></li>
+                        <li onclick="addGridLayer('i3dmgt_tx_grid_100_w1')" style="background-image: url('img/textures_thumbs/i3dmgt_tx_18.png')"></li>
+                        <li onclick="gridGen()" style="background-image: url('img/textures_thumbs/i3dmgt_tx_23.png')"></li>
+
+                    </ul>
+                </div>
+                <hr style="margin: 19px auto 15px auto;" />
+                <h2 style="margin-bottom: 17px;">Brushes</h2>
+                <div class="padding-wrap">
+                    <ul class="clearfix inline center icon-brushes">
+                        <li onclick="selectTool('100', 'i3dmg_terrain_soft_alpha_10')"><img src="img/icons_brushes/brush-1.png" /></li>
+                        <li onclick="selectTool('100', 'i3dmg_terrain_soft_alpha_30')"><img src="img/icons_brushes/brush-2.png" /></li>
+                        <li onclick="selectTool('100', 'i3dmg_terrain_soft_alpha_70')"><img src="img/icons_brushes/brush-3.png" /></li>
+                        <li onclick="selectTool('100', 'standard_3dmg_terrain')"><img src="img/icons_brushes/brush-4.png" /></li>
+                        <li onclick="selectBrush('10', 'i3dmg_terrain_pressure')"><img src="img/icons_brushes/brush-5.png" /></li>
+                        <li onclick="selectBrush('20', 'i3dmg_terrain_hard_10px')"><img src="img/icons_brushes/brush-6.png" /></li>
+                        <li onclick="selectBrush('100', 'i3dmg_terrain_abstract')"><img src="img/icons_brushes/brush-7.png" /></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="textures-wrap" data-id="2">
+                <div style="padding: 0 10px 0 20px;">
+                    <ul class="selector alternative">
+                        <li onclick="process(autex_08)" style="background-image: url('img/auto_textures_thumbs/i3dmgt_autotx_08.png')"></li>
+                        <li onclick="process(autex_01)" style="background-image: url('img/auto_textures_thumbs/i3dmgt_autotx_01.png')"></li>
+                        <li onclick="process(autex_02)" style="background-image: url('img/auto_textures_thumbs/i3dmgt_autotx_02.png')"></li>
+                        <li onclick="process(autex_03)" style="background-image: url('img/auto_textures_thumbs/i3dmgt_autotx_03.png')"></li>
+                        <li onclick="process(autex_06)" style="background-image: url('img/auto_textures_thumbs/i3dmgt_autotx_06.png')"></li>
+                        <li onclick="process(autex_07)" style="background-image: url('img/auto_textures_thumbs/i3dmgt_autotx_07.png')"></li>
+                        <li onclick="process(autex_04)" style="background-image: url('img/auto_textures_thumbs/i3dmgt_autotx_04.png')"></li>
+                        <li onclick="process(autex_05)" style="background-image: url('img/auto_textures_thumbs/i3dmgt_autotx_05.png')"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="textures-wrap" data-id="3">
+                <div style="padding: 0 10px 0 20px;">
+                    <ul class="selector alternative">
+                    <li onclick="process(autmap_01)" style="background-image: url('img/top_view_maps/top_view_map_01.png')"></li>
+                    <li onclick="process(autmap_02)" style="background-image: url('img/top_view_maps/top_view_map_02.png')"></li>
+                    <li onclick="process(autmap_03)" style="background-image: url('img/top_view_maps/top_view_map_03.png')"></li>
+                    <li onclick="process(autmap_04)" style="background-image: url('img/top_view_maps/top_view_map_04.png')"></li>
+                    <li onclick="process(autmap_05)" style="background-image: url('img/top_view_maps/top_view_map_05.png')"></li>
+                    <li onclick="process(autmap_06)" style="background-image: url('img/top_view_maps/top_view_map_06.png')"></li>
+                    </ul>
+                </div>
+            </div>
+            <hr style="margin: 20px auto 27px auto;" />
+            <div class="padding-wrap buttons">
+                <button onClick="go_closeTL()" class="btn">Cancel</button>
+                <button onClick="process(go_saveTL)" class="btn btn-blue">Save</button>
+            </div>
+        </div>
+        
+               
+        
+        <div class="modal-backgrounds">
+            <div class="header">
+                <a class="modal-close" href="#close" rel="modal:close"><img src="img/close.png" alt="close" /></a>
+            </div>
+            <div style="padding: 0 20px;">
+                <h2 style="margin-bottom: 9px;">Backgrounds</h2>
+            </div>
+            <div style="padding: 0 10px 0 20px;">
+                <ul class="selector">
+                    <li onClick="startBgSets('1')" style="background-image: url('img/bg_thumbs/bg_001.png')"></li>
+                    <li onClick="startBgSets('2')" style="background-image: url('img/bg_thumbs/bg_002.png')"></li>
+                    <li onClick="startBgSets('3')" style="background-image: url('img/bg_thumbs/bg_003.png')"></li>
+                    <li onClick="startBgSets('4')" style="background-image: url('img/bg_thumbs/bg_004.png')"></li>
+                    <li onClick="startBgSets('5')" style="background-image: url('img/bg_thumbs/bg_005.png')"></li>
+                    <li onClick="startBgSets('6')" style="background-image: url('img/bg_thumbs/bg_006.png')"></li>
+                    <li onClick="startBgSets('7')" style="background-image: url('img/bg_thumbs/bg_007.png')"></li>
+                    <li onClick="startBgSets('8')" style="background-image: url('img/bg_thumbs/bg_008.png')"></li>
+                    <li onClick="startBgSets('9')" style="background-image: url('img/bg_thumbs/bg_009.png')"></li>
+                    <li onClick="startBgSets('10')" style="background-image: url('img/bg_thumbs/bg_010.png')"></li>
+                    <li onClick="startBgSets('11')" style="background-image: url('img/bg_thumbs/bg_011.png')"></li>
+                    <li onClick="startBgSets('12')" style="background-image: url('img/bg_thumbs/bg_012.png')"></li>
+                    <li onClick="startBgClassix('1')" style="background-image: url('img/bg_thumbs/bg_013.png')"></li>
+                    <li onClick="startBgClassix('2')" style="background-image: url('img/bg_thumbs/bg_014.png')"></li>
+                    <li onClick="startBgClassix('3')" style="background-image: url('img/bg_thumbs/bg_015.png')"></li>
+                    <li onClick="startBgClassix('4')" style="background-image: url('img/bg_thumbs/bg_016.png')"></li>
+                    <li onClick="startBgClassix('5')" style="background-image: url('img/bg_thumbs/bg_017.png')"></li>
+                    <li onClick="startBgClassix('6')" style="background-image: url('img/bg_thumbs/bg_018.png')"></li>
+                    <li onClick="startBgClassix('7')" style="background-image: url('img/bg_thumbs/bg_019.png')"></li>
+                    <li onClick="startBgClassix('8')" style="background-image: url('img/bg_thumbs/bg_020.png')"></li>
+                    <li onClick="startBgSpecial('1')" style="background-image: url('img/bg_thumbs/bg_021.png')"></li>
+
+                </ul>
+            </div>
+        </div>
+        
+        <div class="modal-help">
+            <div class="header">
+                <a class="modal-close" href="#close" rel="modal:close"><img src="img/close.png" alt="close" /></a>
+            </div>
+            <div style="padding: 0 20px;">
+                <h2>Help</h2>
+            </div>
+            <div style="padding-right: 10px;">
+                <div style="padding: 0 10px 0 20px; max-height: 430px; overflow-y: scroll;">
+                    <p>1. Change and design the terrain surface with the gradient presets or texturize with the seamless textures and brushes</p>
+                    <p>2. If you edit the gradients or textures do not forget to press „save“ in the panel</p>
+                    <p>3. Change and style the background with the presets behind the ground button</p>
+                    <p>4. Add contour lines with your own colors</p>
+                    <p>5. Raise or lower the water level</p>
+                    <p>6. Change the map layer height</p>
+                    <p>7. Set the global light</p>
+                    <p>8. You can also draw trees and water onto the surface. Therefore you have to click on the corresponding symbol in the surface drawing tools</p>
+                    <p>TIPP: minimize Photoshop during the generation process to shorten the editing time significantly</p>
+                    <p>More tutorials and help on: </br><a style="color:#1473e6;" href="#" onClick="urlopen()">www.3d-map-generator.com</a></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal-loading" tabindex="-1" role="dialog">
+            <div>
+                <img src="img/logo_ani_process.gif" alt="loading" />
+                <h4>Please be patient!</h4>
+                <h3>App in progress.</h3>
+            </div>
+        </div>
+
+    </body>
+</html>
