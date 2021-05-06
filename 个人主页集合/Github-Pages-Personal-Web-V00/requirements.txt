@@ -2,7 +2,7 @@ Babel==2.1.1
 Flask==0.11.1
 Flask-Babel==0.9
 Flask-Bootstrap==3.3.5.7
-Flask-Cors==2.1.2
+Flask-Cors==3.0.9
 Flask-Login==0.3.2
 Flask-Mail==0.9.1
 Flask-Migrate==2.0.0
